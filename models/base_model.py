@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 
-
 '''
 Write a class BaseModel that defines all common attributes/methods for other classes
 '''
@@ -17,22 +16,24 @@ class BaseModel:
         Constructor method
         '''
         self.id = str(uuid.uuid4())
-        self.created_at = datetime.datetime.isoformat(datetime.datetime.now())
-        self.updated_at = datetime.datetime.isoformat(datetime.datetime.now())
+        self.created_at = datetime.datetime.now()
+        self.updated_at = datetime.datetime.now()
 
     def save(self):
         '''
         Update public instance with current datetime
         '''
-        self.updated_at = datetime.datetime.isoformat(datetime.datetime.now())
+        self.updated_at = datetime.datetime.now()
 
     def to_dict(self):
         '''
         Dictionary containing all
-        keys/values of __dict
+        keys/values of __dict__
         '''
         my_dict = {}
-        my_dict.update(__dict__)
+        my_dict.update(self.__dict__)
+        self.__dict__['created at'] = self.created_at.isoformat()
+        self.__dict__['updated_at'] = self.updated_at.isoformat()
         return my_dict
 
 
