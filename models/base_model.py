@@ -6,7 +6,7 @@ for other classes
 '''
 from uuid import uuid4
 from datetime import datetime
-
+from models import storage
 
 class BaseModel:
     '''
@@ -21,18 +21,22 @@ class BaseModel:
             self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-        else:
+            storage.new(self)
+           self.save()
+         else:
             kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
                                                      '%Y-%m-%dT%H:%M:%S.%f')
             kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
                                                      '%Y-%m-%dT%H:%M:%S.%f')
             self.__dict__.update(kwargs)
 
+            self.save()
     def save(self):
         '''
         Update public instance with current datetime
         '''
         self.updated_at = datetime.now()
+        storage.save(self)
 
     def __str__(self):
         '''
