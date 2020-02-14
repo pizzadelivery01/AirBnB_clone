@@ -4,7 +4,7 @@
 Write a class BaseModel that defines all common attributes/methods
 for other classes
 '''
-import uuid
+from uuid import uuid4
 from datetime import datetime
 
 
@@ -18,7 +18,7 @@ class BaseModel:
         Constructor method
         '''
         if not kwargs:
-            self.id = str(uuid.uuid4())
+            self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
         else:
@@ -27,7 +27,6 @@ class BaseModel:
             kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
                                                      '%Y-%m-%dT%H:%M:%S.%f')
             self.__dict__.update(kwargs)
-            del self.__dict__['__class__']
 
     def save(self):
         '''
