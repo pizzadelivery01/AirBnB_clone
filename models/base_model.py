@@ -6,7 +6,6 @@ for other classes
 '''
 from uuid import uuid4
 from datetime import datetime
-from models.__init__ import storage
 
 class BaseModel:
     '''
@@ -17,6 +16,7 @@ class BaseModel:
         '''
         Constructor method
         '''
+        from models.__init__ import storage
         if not kwargs:
             self.id = str(uuid4())
             self.created_at = datetime.now()
@@ -28,6 +28,7 @@ class BaseModel:
                                                      '%Y-%m-%dT%H:%M:%S.%f')
             kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
                                                      '%Y-%m-%dT%H:%M:%S.%f')
+            del kwargs['__class__']
             self.__dict__.update(kwargs)
             self.save()
 
@@ -35,6 +36,7 @@ class BaseModel:
         '''
         Update public instance with current datetime
         '''
+        from models.__init__ import storage
         self.updated_at = datetime.now()
         storage.save()
 
