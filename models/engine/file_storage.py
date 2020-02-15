@@ -5,7 +5,6 @@ in JSON file to instances
 '''
 import json
 
-
 class FileStorage:
     '''
     FileStorage class
@@ -46,8 +45,12 @@ class FileStorage:
         otherwise, do nothing. If the file doesn’t exist,
         no exception should be raised)
         '''
+        new_dict = {}
         try:
+            from models.base_model import BaseModel
             with open(self.__file_path, "r") as read_file:
-                FileStorage.__objects = json.load(read_file)
+                new_dict = json.load(read_file)
+                for key, value in new_dict.items():
+                    FileStorage.__objects[key] = BaseModel(**value)
         except IOError:
             pass
