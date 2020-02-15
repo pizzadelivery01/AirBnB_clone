@@ -2,9 +2,12 @@
 '''
 Contains entry point of command interpretter
 '''
+import cmd
 from models.base_model import BaseModel
 from models.__init__ import storage
-import cmd
+from models.users import Users
+
+Class_Dict = {"BaseModel": BaseModel, "User": User, "Place": Place, "City": City, "State":, State, "Amenity": Amenity, "Review": Review}
 
 
 class HBNBCommand(cmd.Cmd):
@@ -52,9 +55,14 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print('** class name missing **')
             return
-        elif args != BaseModel():
-            baseModel_instance = BaseModel()
-            print(baseModel_instance.id)
+        elif arg in Class_dict:
+            for key, value in Class_dict.items():
+                if key == arg:
+                    new_instance = Class_dict[key]()
+            storage.save()
+            print(new_instance.id)
+        else:
+            print("** class doesn't exits")
 
     def help_create(self):
         '''
@@ -80,7 +88,7 @@ class HBNBCommand(cmd.Cmd):
 
         key = class_name + '.' + class_id
         try:
-            print(storage._FileStorage__objects[key])
+            print(storage.FileStorage.__objects[key])
         except KeyError:
             print('** no instance found **')
 
@@ -111,13 +119,15 @@ class HBNBCommand(cmd.Cmd):
         except KeyError:
             print('** no instance found **')
 
-    def help_show(self):
+    def help_destroy(self):
         '''
         Help for destroy
         '''
         print('Destroy command to show delete an instance based\
         on class name and id\n')
 
+    def do_all(class=None):
+        
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
