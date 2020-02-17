@@ -24,7 +24,7 @@ class FileStorage:
         Sets in __objects the obj with key
         <obj class name>.id
         '''
-        key = type(self).__name__ + "." + obj.id
+        key = obj.to_dict()['__class__'] + "." + obj.id
         FileStorage.__objects.update({key: obj})
 
     def save(self):
