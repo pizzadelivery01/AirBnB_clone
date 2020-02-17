@@ -18,17 +18,24 @@ class TestBaseModel(unittest.TestCase):
         self.test_name = 'BaseModel'
 
     def test_id(self):
-        bae = self.test_class()
+        base = self.test_class()
         self.assertIsInstance(base.id, str)
         self.assertIsInstance(UUID(base.id), UUID)
 
     def test_created_at(self):
-        base = self.test_class
+        base = self.test_class()
         now = dt.now()
         self.assertIsInstance(base.created_at, dt)
+        self.assertTrue(now >= base.created_at)
 
     def test_updated_at(self):
-        base = self.test_class
-        now = dt.now()
-        base.dt.now
-        self.assertNotEqual(base.dt, now)
+        base = self.test_class()
+        now = base.updated_at
+        self.assertIsInstance(base.updated_at, dt)
+        base.updated_at = dt.now
+
+    def test_str(self):
+        base = self.test_class()
+        form = '[' + self.test_name + "] ({}) {}".format(
+        base.id, str(base.__dict__))
+        self.assertEqual(str(base), form)
