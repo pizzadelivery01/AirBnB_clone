@@ -1,9 +1,10 @@
 import unittest
-import pep8
-from uuid import UUID
-import json
-from datetime import DateTime as dt
 from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
+from uuid import UUID
+from datetime import datetime as dt
+import os
+
 
 class TestBaseModel(unittest.TestCase):
     '''
@@ -12,12 +13,14 @@ class TestBaseModel(unittest.TestCase):
     =========================
     '''
     def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.test_class = BaseModel
         self.test_name = 'BaseModel'
 
     def test_id(self):
-        self.assertIsInstance(self.test_class.id, str)
-        self.assertIsInstance(self.class_name.id, UUID)
+        bae = self.test_class()
+        self.assertIsInstance(base.id, str)
+        self.assertIsInstance(UUID(base.id), UUID)
 
     def test_created_at(self):
         base = self.test_class
