@@ -131,8 +131,24 @@ class HBNBCommand(cmd.Cmd):
         print('Destroy command to show delete an instance based\
         on class name and id\n')
 
-    def do_all(class=None):
-        
+    def do_all(self, arg):
+        new_arg = arg.partition(" ")
+        if not arg:
+            new_list = []
+            new_objects = FileStorage.all(self)
+            for key, values in new_objects.items():
+                new_list.append(str(values))
+            print(new_list)
+        elif new_arg[0] not in Class_Dict:
+            print("** Class doesn't exitst **")
+        else:
+            new_list = []
+            new_objects = FileStorage.all(self)
+            for key, values in new_objects.items():
+                new_key = key.partiion(".")
+                if new_key[0] == new_arg[0]:
+                    new_list.append(str(values))
+                print(new_list)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
