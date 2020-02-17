@@ -26,7 +26,13 @@ class HBNBCommand(cmd.Cmd):
     console class
     '''
     prompt = '(hbtn) '
-    classes = {'BaseModel': BaseModel}
+    classes = {"BaseModel": BaseModel,
+              "User": User,
+              "Place": Place,
+              "State": State,
+              "Amenity": Amenity,
+              "Review" : Review,
+              "City" : City} 
 
     def do_quit(self, command):
         '''
@@ -92,21 +98,18 @@ class HBNBCommand(cmd.Cmd):
         
         if not args:
             print('** class name missing **')
-        elif class_name not in Class_Dict:
+            return    
+        if class_name not in Class_Dict:
             print("** Class doesn't exitst **")
-        elif len(new_instance) >= 1:
-            try:
-                new_objects = storage.all()
-                new_key = class_name + '.' + class_id
-                flag = 0
-                for key, values in new_objects.items():
-                    if key == new_key:
-                        flag = 1
-                        print(values)
-                if flag == 0:
-                    print("** no instance found **")
-            except IndexError:
-                print('** instance id missing **')
+            return
+        if not class_id:
+            print('** instance id missing **')
+            return
+        new_key = class_name + '.' + class_id
+        try:
+            print(storage._FileStorage__objects[new_key])
+        except KeyError:
+            print("** no instance found **")
 
     def help_show(self):
         '''
@@ -143,24 +146,25 @@ class HBNBCommand(cmd.Cmd):
         print('Destroy command to show delete an instance based\
         on class name and id\n')
 
-    def do_all(self, arg):
-        new_arg = arg.partition(" ")
-        if not arg:
-            new_list = []
-            new_objects = storage.all()
-            for key, values in new_objects.items():
-                new_list.append(str(values))
-            print(new_list)
-        elif new_arg[0] not in Class_Dict:
-            print("** Class doesn't exitst **")
-        else:
-            new_list = []
-            new_objects = storage.all()
-            for key, values in new_objects.items():
-                new_key = key.split(".")
-                if new_key[0] == new_arg[0]:
-                    new_list.append(str(values))
-                print(new_list)
+    def do_all(self, arg=""):
+        """
+        Prints all instances based on class
+        """
+        new_list = []
 
+        if arg:
+            if arg not in Class_Dict:
+                print("** class doesn't exsist **")
+                return
+            for key, value in storage._FileStorage__objects.items():
+                if key.split(".")[0] == arg:
+                    new_list.append(str(value))
+                    print("arg exsist check")
+                    print(new_list)
+        else:
+            for key, value in storage._FileStorage__objects.items():
+                new_list.append(str(value))
+        print(new_list)
+        
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
