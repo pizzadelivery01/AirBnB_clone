@@ -55,10 +55,10 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print('** class name missing **')
             return
-        elif arg in Class_dict:
-            for key, value in Class_dict.items():
+        elif arg in Class_Dict:
+            for key, value in Class_Dict.items():
                 if key == arg:
-                    new_instance = Class_dict[key]()
+                    new_instance = Class_Dict[key]()
             storage.save()
             print(new_instance.id)
         else:
@@ -78,19 +78,24 @@ class HBNBCommand(cmd.Cmd):
         new_instance = args.partition(' ')
         class_name = new_instance[0]
         class_id = new_instance[2]
-
-        if class_name not in HBNBCommand.classes:
+        
+        if not arg:
             print('** class name missing **')
-            return
-        if not class_id:
+        elif class_name not in Class_Dict:
+            print("** Class doesn't exitst **")
+        elif len(new_instance) >= 1:
+            try:
+                new_objects = FileStorage.all(self)
+                new_key = class_name + '.' + class_id
+                flag = 0
+                for key, values in new_objects.items():
+                    if key == new_key:
+                        flag = 1
+                        print(values)
+                if flag == 0:
+                    print("** no instance found **")
+            except indexError:
             print('** instance id missing **')
-            return
-
-        key = class_name + '.' + class_id
-        try:
-            print(storage.FileStorage.__objects[key])
-        except KeyError:
-            print('** no instance found **')
 
     def help_show(self):
         '''
