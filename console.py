@@ -159,7 +159,6 @@ class HBNBCommand(cmd.Cmd):
             for key, value in storage._FileStorage__objects.items():
                 if key.split(".")[0] == arg:
                     new_list.append(str(value))
-                    print("arg exsist check")
                     print(new_list)
         else:
             for key, value in storage._FileStorage__objects.items():
