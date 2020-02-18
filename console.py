@@ -105,7 +105,7 @@ class HBNBCommand(cmd.Cmd):
         if not class_id:
             print('** instance id missing **')
             return
-        new_key = class_name + '.' + class_)
+        new_key = class_name + '.' + class_id
         try:
             print(storage._FileStorage__objects[new_key])
         except KeyError:
@@ -199,6 +199,30 @@ class HBNBCommand(cmd.Cmd):
         """
         print("updates and objects with new information")
         print("update <class> <id> <attribute> <value>")
-        
+
+    def do_count(self, arg):
+        """
+        count number of instances by class
+        """
+        counter = 0
+
+        new_arg = arg.split(" ")
+        if new_arg[0] not in Class_Dict:
+            print("** class doesn't exsist **")
+            return
+        new_list = storage._FileStorage__objects.items()
+        for key, value in new_list:
+            temp_key = str(key)
+            new_key = temp_key.split(".")
+            if new_key[0] == new_arg[0]:
+                counter = (counter + 1)
+        print(counter)
+
+    def help_count(self):
+        """
+        counts the number of instances of a class
+        """
+        print("count <class>")
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
