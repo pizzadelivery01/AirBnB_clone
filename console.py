@@ -105,7 +105,7 @@ class HBNBCommand(cmd.Cmd):
         if not class_id:
             print('** instance id missing **')
             return
-        new_key = class_name + '.' + class_id
+        new_key = class_name + '.' + class_)
         try:
             print(storage._FileStorage__objects[new_key])
         except KeyError:
@@ -122,7 +122,7 @@ class HBNBCommand(cmd.Cmd):
         Deletes an instance basesd on
         class name and id
         '''
-        new_args = arg.partition(" ")
+        new_args = arg.split(" ")
         class_name = new_args[0]
         class_id = new_args[1]
         if not class_name:
