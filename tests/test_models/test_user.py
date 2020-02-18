@@ -1,9 +1,6 @@
-import unittest
-from models.base_model import BaseModel
+#!/usr/bin/python3
 from models.user import User
 from tests.test_models.test_base_model import TestBaseModel
-from uuid import UUID
-from datetime import datetime as dt
 
 
 class TestUser(TestBaseModel):
@@ -18,13 +15,17 @@ class TestUser(TestBaseModel):
         self.test_name = "User"
 
     def test_email(self):
-        self.assertIsInstance(self.test_class.email, str)
+        user = self.self_class()
+        self.assertEqual(type(user.email), str)
 
     def test_password(self):
-        self.assertIsInstance(self.test_class.password, str)
+        user = self.self_class()
+        self.assertEqual(type(user.password), str)
 
-    def test_first_name(self):
-        self.assertIsInstance(self.test_class.first_name, str)
+    def test_firstName(self):
+        user = self.self_class()
+        self.assertEqual(type(user.first_name), str)
 
-    def test_last_name(self):
-        self.assertIsInstance(self.test_class.last_name, str)
+    def test_lastName(self):
+        user = self.self_class()
+        self.assertEqual(type(user.last_name), str)

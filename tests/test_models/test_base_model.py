@@ -1,8 +1,8 @@
+#!/usr/bin/python3
 import unittest
 from models.base_model import BaseModel
-from models.engine.file_storage import FileStorage
 from uuid import UUID
-from datetime import datetime as dt
+from datetime import datetime
 import os
 
 
@@ -24,18 +24,19 @@ class TestBaseModel(unittest.TestCase):
 
     def test_created_at(self):
         base = self.test_class()
-        now = dt.now()
-        self.assertIsInstance(base.created_at, dt)
+        now = datetime.now()
+        self.assertIsInstance(base.created_at, datetime)
         self.assertTrue(now >= base.created_at)
 
     def test_updated_at(self):
         base = self.test_class()
-        now = base.updated_at
-        self.assertIsInstance(base.updated_at, dt)
-        base.updated_at = dt.now
+        base.updated_at = datetime.now()
+        store = base.updated_at
+        self.assertIsInstance(base.updated_at, datetime)
+        base.updated_at = datetime.now()
+        self.assertNotEqual(base.updated_at, store)
 
     def test_str(self):
         base = self.test_class()
-        form = '[' + self.test_name + "] ({}) {}".format(
-        base.id, str(base.__dict__))
-        self.assertEqual(str(base), form)
+        self.assertEqual(str(base), '[{}] ({}) {}'.format
+                         (self.name, base.id, base.__dict__))
