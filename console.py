@@ -168,15 +168,12 @@ class HBNBCommand(cmd.Cmd):
         """
         updates object
         """
-        new_obj = args.split(" ")
-        try:
-            class_name = new_object[0]
-            class_id = new_object[1]
-            at_name = new_object[2]
-            at_val = new_object[3]
-            objects = storage._FileStorage__objects.items()
-        except:
-            pass
+        new_object = args.split(" ")
+        class_name = new_object[0]
+        class_id = new_object[1]
+        at_name = new_object[2]
+        at_val = new_object[3]
+        objects = storage._FileStorage__objects.items()
         if not class_name:
             print("** class name missing **")
             return
@@ -187,12 +184,15 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
             return
         new_key = class_name + "." + class_id
-        obj = objects[new_key]
         no_touchy = ["id", "created_at", "updated_at"]
-        if at_name not in no_touchy:
-            obj.__dict__[at_name] = at_val
-            obj.updated_at = datetime.now()
-            storage.save()
+        for key,value in storage._FileStorage__objects.items():
+            if new_key not in no_touchy:
+                if new_key == key:
+                    setattr(value, at_name, at_val)
+                    storage.save()
+                else:
+                    print("** no instance found **")
+                    
     def help_update(self):
         """
         Help for update
