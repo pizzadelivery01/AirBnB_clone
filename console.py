@@ -185,14 +185,15 @@ class HBNBCommand(cmd.Cmd):
             return
         new_key = class_name + "." + class_id
         no_touchy = ["id", "created_at", "updated_at"]
-        for key,value in storage._FileStorage__objects.items():
-            if new_key not in no_touchy:
-                if new_key == key:
-                    setattr(value, at_name, at_val)
-                    storage.save()
-                else:
-                    print("** no instance found **")
-                    
+        try:
+            for key, value in storage._FileStorage__objects.items():
+                if new_key not in no_touchy:
+                    if new_key = key:
+                        setattr(value, at_name, at_val)
+                        storage.save()            
+        except:
+            pass
+        
     def help_update(self):
         """
         Help for update
