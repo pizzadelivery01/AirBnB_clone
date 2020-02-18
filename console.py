@@ -17,8 +17,8 @@ Class_Dict = {"BaseModel": BaseModel,
               "Place": Place,
               "State": State,
               "Amenity": Amenity,
-              "Review" : Review,
-              "City" : City}
+              "Review": Review,
+              "City": City}
 
 
 class HBNBCommand(cmd.Cmd):
@@ -27,12 +27,12 @@ class HBNBCommand(cmd.Cmd):
     '''
     prompt = '(hnbn) '
     classes = {"BaseModel": BaseModel,
-              "User": User,
-              "Place": Place,
-              "State": State,
-              "Amenity": Amenity,
-              "Review" : Review,
-              "City" : City} 
+               "User": User,
+               "Place": Place,
+               "State": State,
+               "Amenity": Amenity,
+               "Review": Review,
+               "City": City}
 
     def do_quit(self, command):
         '''
@@ -95,10 +95,10 @@ class HBNBCommand(cmd.Cmd):
         new_instance = args.partition(' ')
         class_name = new_instance[0]
         class_id = new_instance[2]
-        
+
         if not args:
             print('** class name missing **')
-            return    
+            return
         if class_name not in Class_Dict:
             print("** Class doesn't exitst **")
             return
@@ -138,7 +138,7 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
             except KeyError:
                 print("** no instance found **")
-                        
+
     def help_destroy(self):
         '''
         Help for destroy
@@ -177,7 +177,7 @@ class HBNBCommand(cmd.Cmd):
         if not class_name:
             print("** class name missing **")
             return
-        if class_name not in  Class_Dict:
+        if class_name not in Class_Dict:
             print("** class doesn't exsist **")
             return
         if not class_id:
@@ -190,10 +190,10 @@ class HBNBCommand(cmd.Cmd):
                 if new_key not in no_touchy:
                     if new_key == key:
                         setattr(value, at_name, at_val)
-                        storage.save()            
-        except:
+                        storage.save()
+        except BaseException:
             pass
-        
+
     def help_update(self):
         """
         Help for update
@@ -224,6 +224,7 @@ class HBNBCommand(cmd.Cmd):
         counts the number of instances of a class
         """
         print("count <class>")
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
