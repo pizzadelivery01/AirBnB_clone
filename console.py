@@ -164,7 +164,7 @@ class HBNBCommand(cmd.Cmd):
                 new_list.append(str(value))
         print(new_list)
 
-    def update(self, args):
+    def do_update(self, args):
         """
         updates object
         """
