@@ -6,6 +6,7 @@ in JSON file to instances
 import json
 from datetime import datetime
 
+
 class FileStorage:
     '''
     FileStorage class
