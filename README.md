@@ -82,3 +82,10 @@ And try to `show` it again, we get this message:
 ```
 The instance has been deleted.
 
+<br>
+<br>
+
+0x00. AirBnB clone - The console
+  
+Jeremy Bedolla <1106@holbertonschool.com>\
+Geoff Zoref <1034@holbertonschool.com>
