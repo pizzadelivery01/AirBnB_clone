@@ -188,7 +188,7 @@ class HBNBCommand(cmd.Cmd):
         try:
             for key, value in storage._FileStorage__objects.items():
                 if new_key not in no_touchy:
-                    if new_key = key:
+                    if new_key == key:
                         setattr(value, at_name, at_val)
                         storage.save()            
         except:
