@@ -164,6 +164,13 @@ class HBNBCommand(cmd.Cmd):
                 new_list.append(str(value))
         print(new_list)
 
+    def help_all(self):
+        """
+        displays all instances [based on class if chosen]
+        """
+        print("displays all instances [based on class if chosen]")
+        print("all [class]")
+        
     def do_update(self, args):
         """
         updates object
