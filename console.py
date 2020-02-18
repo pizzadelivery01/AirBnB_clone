@@ -25,7 +25,7 @@ class HBNBCommand(cmd.Cmd):
     '''
     console class
     '''
-    prompt = '(hbtn) '
+    prompt = '(hnbn) '
     classes = {"BaseModel": BaseModel,
               "User": User,
               "Place": Place,
@@ -123,22 +123,22 @@ class HBNBCommand(cmd.Cmd):
         class name and id
         '''
         new_args = arg.partition(" ")
-        if not arg:
+        class_name = new_args[0]
+        class_id = new_args[1]
+        if not class_name:
             print('** class name missing **')
-        elif new_args[0] not in Class_Dict:
+        elif class_name not in Class_Dict:
             print("** class doesn't exist **")
-        elif len(new_args) <= 1:
+        elif not class_id:
+            print("** instance id missing **")
+        else:
+            new_key = class_name + '.' + class_id
             try:
-                new_objects = storage.all()
-                new_key = new_args[0] + '.' + new_args[1]
-                try:
-                    new_objects.pop(new_key)
-                    storage.save()
-                except KeyError:
-                    print("** no instance found **")
-            except IndexError:
-                    print("** instance id missing **")
-
+                del(storage._FileStorage__objects[new_key])
+                storage.save()
+            except KeyError:
+                print("** no instance found **")
+                        
     def help_destroy(self):
         '''
         Help for destroy
@@ -146,7 +146,7 @@ class HBNBCommand(cmd.Cmd):
         print('Destroy command to show delete an instance based\
         on class name and id\n')
 
-    def do_all(self, arg=""):
+    def do_all(self, arg):
         """
         Prints all instances based on class
         """
@@ -159,11 +159,46 @@ class HBNBCommand(cmd.Cmd):
             for key, value in storage._FileStorage__objects.items():
                 if key.split(".")[0] == arg:
                     new_list.append(str(value))
-                    print(new_list)
         else:
             for key, value in storage._FileStorage__objects.items():
                 new_list.append(str(value))
         print(new_list)
+
+    def update(self, args):
+        """
+        updates object
+        """
+        new_obj = args.split(" ")
+        try:
+            class_name = new_object[0]
+            class_id = new_object[1]
+            at_name = new_object[2]
+            at_val = new_object[3]
+            objects = storage._FileStorage__objects.items()
+        except:
+            pass
+        if not class_name:
+            print("** class name missing **")
+            return
+        if class_name not in  Class_Dict:
+            print("** class doesn't exsist **")
+            return
+        if not class_id:
+            print("** instance id missing **")
+            return
+        new_key = class_name + "." + class_id
+        obj = objects[new_key]
+        no_touchy = ["id", "created_at", "updated_at"]
+        if at_name not in no_touchy:
+            obj.__dict__[at_name] = at_val
+            obj.updated_at = datetime.now()
+            storage.save()
+    def help_update(self):
+        """
+        Help for update
+        """
+        print("updates and objects with new information")
+        print("update <class> <id> <attribute> <value>")
         
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
