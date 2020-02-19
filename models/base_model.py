@@ -17,7 +17,7 @@ class BaseModel:
         '''
         Constructor method
         '''
-        from models.__init__ import storage
+        from models import storage
         if not kwargs:
             self.id = str(uuid4())
             self.created_at = datetime.now()
@@ -32,12 +32,11 @@ class BaseModel:
             del kwargs['__class__']
             self.__dict__.update(kwargs)
 
-
     def save(self):
         '''
         Update public instance with current datetime
         '''
-        from models.__init__ import storage
+        from models import storage
         self.updated_at = datetime.now()
         storage.save()
 
