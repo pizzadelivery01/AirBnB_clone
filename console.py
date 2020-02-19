@@ -79,7 +79,7 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
             print(new_instance.id)
         else:
-            print("** class doesn't exits")
+            print("** class doesn't exist")
 
     def help_create(self):
         '''
@@ -159,7 +159,7 @@ class HBNBCommand(cmd.Cmd):
         new_list = []
         if arg:
             if arg not in Class_Dict:
-                print("** class doesn't exsist **")
+                print("** class doesn't exist **")
                 return
             for key, value in storage._FileStorage__objects.items():
                 if key.split(".")[0] == arg:
@@ -199,7 +199,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         if class_name not in Class_Dict:
-            print("** class doesn't exsist **")
+            print("** class doesn't exist **")
             return
         if not class_id:
             print("** instance id missing **")
@@ -218,7 +218,8 @@ class HBNBCommand(cmd.Cmd):
                 if new_key == key:
                     setattr(value, at_name, at_val)
                     storage.save()
-
+        if new_key not in storage._FileStorage__objects.items():
+            print("** no instance found **")
     def help_update(self):
         """
         Help for update
@@ -234,7 +235,7 @@ class HBNBCommand(cmd.Cmd):
 
         new_arg = arg.split(" ")
         if new_arg[0] not in Class_Dict:
-            print("** class doesn't exsist **")
+            print("** class doesn't exist **")
             return
         new_list = storage._FileStorage__objects.items()
         for key, value in new_list:
