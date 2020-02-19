@@ -220,6 +220,7 @@ class HBNBCommand(cmd.Cmd):
                     storage.save()
         if new_key not in storage._FileStorage__objects.items():
             print("** no instance found **")
+
     def help_update(self):
         """
         Help for update
@@ -265,6 +266,7 @@ class HBNBCommand(cmd.Cmd):
                     self.do_all(class_name)
                 if method_name[0:7] == 'count()':
                     self.do_count(class_name)
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
