@@ -122,25 +122,28 @@ class HBNBCommand(cmd.Cmd):
         Deletes an instance basesd on
         class name and id
         '''
+        new_args = ""
+        class_name = ""
+        class_id = ""
         try:
-            w_args = arg.split(" ")
+            new_args = arg.split(" ")
             class_name = new_args[0]
             class_id = new_args[1]
-            if not class_name:
-                print('** class name missing **')
-            elif class_name not in Class_Dict:
-                print("** class doesn't exist **")
-            elif not class_id:
-                print("** instance id missing **")
-            else:
-                new_key = class_name + '.' + class_id
-                try:
-                    del(storage._FileStorage__objects[new_key])
-                    storage.save()
-                except KeyError:
-                    print("** no instance found **")
-        except (IndexError, NameError):
+        except BaseException:
             pass
+        if not class_name:
+            print('** class name missing **')
+        elif class_name not in Class_Dict:
+            print("** class doesn't exist **")
+        elif not class_id:
+            print("** instance id missing **")
+        else:
+            new_key = class_name + '.' + class_id
+            try:
+                del(storage._FileStorage__objects[new_key])
+                storage.save()
+            except KeyError:
+                print("** no instance found **")
 
     def help_destroy(self):
         '''
