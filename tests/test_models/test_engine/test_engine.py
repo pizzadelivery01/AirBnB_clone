@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 import unittest
 from models.base_model import BaseModel
-
 import os
 
 
@@ -15,7 +14,7 @@ class TestFileStorage(unittest.TestCase):
         File creation test
         '''
         new = BaseModel()
-        self.assertFalse(os.path.exists('JSONstorage.json'))
+        self.assertTrue(os.path.exists('JSONstorage.json'))
 
     def tearDown(self):
         '''
