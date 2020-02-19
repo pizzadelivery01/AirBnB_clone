@@ -95,12 +95,12 @@ class HBNBCommand(cmd.Cmd):
         new_instance = args.partition(' ')
         class_name = new_instance[0]
         class_id = new_instance[2]
-
+        
         if not args:
             print('** class name missing **')
             return
         if class_name not in Class_Dict:
-            print("** Class doesn't exitst **")
+            print("** Class doesn't exist **")
             return
         if not class_id:
             print('** instance id missing **')
@@ -108,7 +108,7 @@ class HBNBCommand(cmd.Cmd):
         new_key = class_name + '.' + class_id
         try:
             print(storage._FileStorage__objects[new_key])
-        except KeyError:
+        except BaseException:
             print("** no instance found **")
 
     def help_show(self):
@@ -139,7 +139,7 @@ class HBNBCommand(cmd.Cmd):
                     storage.save()
                 except KeyError:
                     print("** no instance found **")
-        except BaseException:
+        except (IndexError, NameError):
             pass
 
     def help_destroy(self):
@@ -177,6 +177,12 @@ class HBNBCommand(cmd.Cmd):
         """
         updates object
         """
+        new_object = ""
+        class_name = ""
+        class_id = ""
+        at_name = ""
+        at_val = ""
+        objects = ""
         try:
             new_object = args.split(" ")
             class_name = new_object[0]
@@ -184,30 +190,31 @@ class HBNBCommand(cmd.Cmd):
             at_name = new_object[2]
             at_val = new_object[3]
             objects = storage._FileStorage__objects.items()
-            if not class_name:
-                print("** class name missing **")
-                return
-            if class_name not in Class_Dict:
-                print("** class doesn't exsist **")
-                return
-            if not class_id:
-                print("** instance id missing **")
-                return
-            if not at_val:
-                print("** value missing **")
-                return
-            if not at_name:
-                print("** attribute name missing **")
-                return
-            new_key = class_name + "." + class_id
-            no_touchy = ["id", "created_at", "updated_at"]
-            for key, value in storage._FileStorage__objects.items():
-                if new_key not in no_touchy:
-                    if new_key == key:
-                        setattr(value, at_name, at_val)
-                        storage.save()
-        except BaseException:
-                pass
+        except (IndexError, NameError):
+            pass
+        if not class_name:
+            print("** class name missing **")
+            return
+        if class_name not in Class_Dict:
+            print("** class doesn't exsist **")
+            return
+        if not class_id:
+            print("** instance id missing **")
+            return
+        if not at_name:
+            print("** attribute name missing **")
+            return
+        if not at_val:
+            print("** value missing **")
+            return
+
+        new_key = class_name + "." + class_id
+        no_touchy = ["id", "created_at", "updated_at"]
+        for key, value in storage._FileStorage__objects.items():
+            if new_key not in no_touchy:
+                if new_key == key:
+                    setattr(value, at_name, at_val)
+                    storage.save()
 
     def help_update(self):
         """
