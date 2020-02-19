@@ -31,7 +31,7 @@ class BaseModel:
                                                      '%Y-%m-%dT%H:%M:%S.%f')
             del kwargs['__class__']
             self.__dict__.update(kwargs)
-
+            self.save()
     def save(self):
         '''
         Update public instance with current datetime
