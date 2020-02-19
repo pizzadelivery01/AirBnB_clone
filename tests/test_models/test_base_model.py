@@ -74,7 +74,7 @@ class TestBaseModel(unittest.TestCase):
         '''
         save Test
         '''
-        pass
+        self.assertFalse(os.path.exists('JSONstorage.json'))
 
     def test_str(self):
         '''
