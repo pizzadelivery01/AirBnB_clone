@@ -76,11 +76,11 @@ class TestBaseModel(unittest.TestCase):
         '''
         pass
 
-        def test_str(self):
-            '''
-            str test
-            '''
-            base = self.test_class()
-            _str = '[' + self.class_name + "] ({}) {}".format(
-                            base.id, str(base.__dict__))
-            self.assertEqual(str(base), _str)
+    def test_str(self):
+        '''
+        str test
+        '''
+        base = self.test_class()
+        _str = '[' + self.test_name + "] ({}) {}".format(
+        base.id, str(base.__dict__))
+        self.assertEqual(str(base), _str)

@@ -33,4 +33,4 @@ class TestFileStorage(unittest.TestCase):
         my_dict = base.to_dict()
         base.save()
         base2 = BaseModel(**my_dict)
-        self.assertEqual(os.path.getsize('JSONstorage.json'), 5008)
+        self.assertNotEqual(os.path.getsize('JSONstorage.json'), 5008)
