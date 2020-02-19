@@ -25,7 +25,7 @@ class HBNBCommand(cmd.Cmd):
     '''
     console class
     '''
-    prompt = '(hnbn) '
+    prompt = '(hbnb) '
     classes = {"BaseModel": BaseModel,
                "User": User,
                "Place": Place,
