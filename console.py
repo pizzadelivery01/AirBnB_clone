@@ -190,6 +190,11 @@ class HBNBCommand(cmd.Cmd):
         if not class_id:
             print("** instance id missing **")
             return
+        if not at_val:
+            print("** value missing **")
+            return
+        if not at_name:
+            print("** attribute name missing **")
         new_key = class_name + "." + class_id
         no_touchy = ["id", "created_at", "updated_at"]
         try:
