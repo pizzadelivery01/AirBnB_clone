@@ -272,6 +272,11 @@ class HBNBCommand(cmd.Cmd):
                     arg = class_name + ' ' + show_id
                     print(arg)
                     self.do_show(arg)
+                if method_name[0:8] == 'destroy(':
+                    method_name2 = method_name.split('"')
+                    show_id = method_name2[1]
+                    arg = class_name + ' ' + show_id
+                    self.do_destroy(arg)
 
 
 
