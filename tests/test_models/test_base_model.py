@@ -20,6 +20,21 @@ class TestBaseModel(unittest.TestCase):
         self.test_class = BaseModel
         self.test_name = 'BaseModel'
 
+    def setUp(self):
+        '''
+        Setup
+        '''
+        pass
+
+    def tearDown(self):
+        '''
+        Destroy Json File
+        '''
+        try:
+            os.remove('JSONstorage.json')
+        except Exception:
+            pass
+
     def test_id(self):
         '''
         Attribute test
@@ -46,3 +61,9 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(base.updated_at, datetime)
         base.updated_at = datetime.now()
         self.assertNotEqual(base.updated_at, store)
+
+    def test_todict(self):
+        """ """
+        base = self.test_class()
+        num = base.to_dict()
+        self.assertEqual(base.to_dict(), num)
