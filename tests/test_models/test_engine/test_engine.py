@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import unittest
 from models import storage
+from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 import os
 
@@ -9,6 +10,19 @@ class TestFileStorage(unittest.TestCase):
     '''
     FileStorage test
     '''
+    def __init__(self, *args, **kwargs):
+        '''
+        Constructor
+        '''
+        super().__init__(*args, **kwargs)
+        self.test_class = FileStorage
+
+    def test_pathname(self):
+        '''
+        Attrib test
+        '''
+        test = self.test_class()
+        self.assertIsInstance(test._FileStorage__file_path, str)
 
     def test_file_save(self):
         '''
@@ -16,6 +30,13 @@ class TestFileStorage(unittest.TestCase):
         '''
         storage.save()
         self.assertTrue(os.path.exists('JSONstorage.json'))
+
+    def test_objects(self):
+        '''
+        Test
+        '''
+        test = self.test_class()
+        self.assertIsInstance(test._FileStorage__objects, dict)
 
     def tearDown(self):
         '''
