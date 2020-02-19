@@ -26,7 +26,6 @@ class TestBaseModel(unittest.TestCase):
         '''
         base = self.test_class()
         self.assertIsInstance(base.id, str)
-        self.assertIsInstance(UUID(base.id), UUID)
 
     def test_created_at(self):
         '''
@@ -47,11 +46,3 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(base.updated_at, datetime)
         base.updated_at = datetime.now()
         self.assertNotEqual(base.updated_at, store)
-
-    def test_str(self):
-        '''
-        Attribute test
-        '''
-        base = self.test_class()
-        self.assertEqual(str(base), '[{}] ({}) {}'.format
-                         (self.name, base.id, base.__dict__))

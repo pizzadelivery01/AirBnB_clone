@@ -86,11 +86,11 @@ class TestPlace(TestBaseModel):
         Attribute test
         '''
         place = self.test_class()
-        self.assertIsInstance(place.number_latitude, float)
+        self.assertIsInstance(place.latitude, float)
 
     def test_amenity_id(self):
         '''
         Attribute test
         '''
         place = self.test_class()
-        self.assertIsInstance(place.number_amenity_ids, list)
+        self.assertIsInstance(place.amenity_ids, list)

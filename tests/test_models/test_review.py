@@ -23,14 +23,14 @@ class TestReview(TestBaseModel):
         Attribute test
         '''
         review = self.test_class()
-        self.assertIsInstance(review.name, str)
+        self.assertIsInstance(review.place_id, str)
 
     def test_user_id_review(self):
         '''
         Attribute test
         '''
         review = self.test_class()
-        self.assertIsInstance(review.name, str)
+        self.assertIsInstance(review.user_id, str)
 
     def test_text(self):
         '''

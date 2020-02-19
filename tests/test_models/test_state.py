@@ -10,8 +10,9 @@ class TestState(TestBaseModel):
     User tests
     =========================
     '''
+
     def __init__(self, *args, **kwargs):
-        '''  
+        '''
         Constructor
         '''
         super().__init__(*args, **kwargs)

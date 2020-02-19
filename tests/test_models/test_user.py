@@ -14,7 +14,7 @@ class TestUser(TestBaseModel):
         Constructor
         '''
         super().__init__(*args, **kwargs)
-        self.test_class = User
+        self.self_class = User
         self.test_name = "User"
 
     def test_email(self):
@@ -22,25 +22,25 @@ class TestUser(TestBaseModel):
         Attribute test
         '''
         user = self.self_class()
-        self.assertEqual(type(user.email), str)
+        self.assertIsInstance(user.email, str)
 
     def test_password(self):
         '''
         Attribute test
         '''
         user = self.self_class()
-        self.assertEqual(type(user.password), str)
+        self.assertIsInstance(user.password, str)
 
     def test_firstName(self):
         '''
         Attribute test
         '''
         user = self.self_class()
-        self.assertEqual(type(user.first_name), str)
+        self.assertIsInstance(user.first_name, str)
 
     def test_lastName(self):
         '''
         Attribute test
         '''
         user = self.self_class()
-        self.assertEqual(type(user.last_name), str)
+        self.assertIsInstance(user.last_name, str)
