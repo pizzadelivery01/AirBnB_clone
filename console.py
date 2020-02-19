@@ -274,5 +274,6 @@ class HBNBCommand(cmd.Cmd):
                     self.do_show(arg)
 
 
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
