@@ -218,6 +218,7 @@ class HBNBCommand(cmd.Cmd):
                 if new_key == key:
                     setattr(value, at_name, at_val)
                     storage.save()
+                    return
         if new_key not in storage._FileStorage__objects.items():
             print("** no instance found **")
 
@@ -277,7 +278,15 @@ class HBNBCommand(cmd.Cmd):
                     show_id = method_name2[1]
                     arg = class_name + ' ' + show_id
                     self.do_destroy(arg)
-
+                if method_name[0:7] == 'update(':
+                    method_name2 = method_name.split('"')
+                    show_id = method_name2[1]
+                    show_att_name = method_name2[3]
+                    show_att_val = method_name2[5]
+                    arg = class_name + ' ' + show_id +\
+                        ' ' + show_att_name + ' ' + show_att_val
+                    print(arg)
+                    self.do_update(arg)
 
 
 if __name__ == '__main__':
