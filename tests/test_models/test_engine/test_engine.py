@@ -9,7 +9,7 @@ class TestFileStorage(unittest.TestCase):
     FileStorage test
     '''
 
-    def test_fileStorage(Self):
+    def test_fileStorage(self):
         '''
         Filestorage
         '''

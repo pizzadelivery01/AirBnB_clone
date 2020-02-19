@@ -11,10 +11,16 @@ class TestState(TestBaseModel):
     =========================
     '''
     def __init__(self, *args, **kwargs):
+        '''  
+        Constructor
+        '''
         super().__init__(*args, **kwargs)
         self.test_class = State
         self.test_name = "State"
 
     def test_state_id(self):
+        '''
+        Attribute test
+        '''
         state = self.test_class()
         self.assertIsInstance(state.name, str)

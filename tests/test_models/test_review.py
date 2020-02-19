@@ -11,18 +11,30 @@ class TestReview(TestBaseModel):
     =========================
     '''
     def __init__(self, *args, **kwargs):
+        '''
+        Constructor
+        '''
         super().__init__(*args, **kwargs)
         self.test_class = Review
         self.test_name = "Review"
 
     def test_place_id(self):
+        '''
+        Attribute test
+        '''
         review = self.test_class()
         self.assertIsInstance(review.name, str)
 
     def test_user_id_review(self):
+        '''
+        Attribute test
+        '''
         review = self.test_class()
         self.assertIsInstance(review.name, str)
 
     def test_text(self):
+        '''
+        Attribute test
+        '''
         review = self.test_class()
         self.assertIsInstance(review.text, str)
