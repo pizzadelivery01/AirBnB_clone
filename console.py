@@ -122,22 +122,25 @@ class HBNBCommand(cmd.Cmd):
         Deletes an instance basesd on
         class name and id
         '''
-        new_args = arg.split(" ")
-        class_name = new_args[0]
-        class_id = new_args[1]
-        if not class_name:
-            print('** class name missing **')
-        elif class_name not in Class_Dict:
-            print("** class doesn't exist **")
-        elif not class_id:
-            print("** instance id missing **")
-        else:
-            new_key = class_name + '.' + class_id
-            try:
-                del(storage._FileStorage__objects[new_key])
-                storage.save()
-            except KeyError:
-                print("** no instance found **")
+        try:
+            w_args = arg.split(" ")
+            class_name = new_args[0]
+            class_id = new_args[1]
+            if not class_name:
+                print('** class name missing **')
+            elif class_name not in Class_Dict:
+                print("** class doesn't exist **")
+            elif not class_id:
+                print("** instance id missing **")
+            else:
+                new_key = class_name + '.' + class_id
+                try:
+                    del(storage._FileStorage__objects[new_key])
+                    storage.save()
+                except KeyError:
+                    print("** no instance found **")
+        except BaseException:
+            pass
 
     def help_destroy(self):
         '''
@@ -151,7 +154,6 @@ class HBNBCommand(cmd.Cmd):
         Prints all instances based on class
         """
         new_list = []
-
         if arg:
             if arg not in Class_Dict:
                 print("** class doesn't exsist **")
@@ -175,37 +177,37 @@ class HBNBCommand(cmd.Cmd):
         """
         updates object
         """
-        new_object = args.split(" ")
-        class_name = new_object[0]
-        class_id = new_object[1]
-        at_name = new_object[2]
-        at_val = new_object[3]
-        objects = storage._FileStorage__objects.items()
-        if not class_name:
-            print("** class name missing **")
-            return
-        if class_name not in Class_Dict:
-            print("** class doesn't exsist **")
-            return
-        if not class_id:
-            print("** instance id missing **")
-            return
-        if not at_val:
-            print("** value missing **")
-            return
-        if not at_name:
-            print("** attribute name missing **")
-            return
-        new_key = class_name + "." + class_id
-        no_touchy = ["id", "created_at", "updated_at"]
         try:
+            new_object = args.split(" ")
+            class_name = new_object[0]
+            class_id = new_object[1]
+            at_name = new_object[2]
+            at_val = new_object[3]
+            objects = storage._FileStorage__objects.items()
+            if not class_name:
+                print("** class name missing **")
+                return
+            if class_name not in Class_Dict:
+                print("** class doesn't exsist **")
+                return
+            if not class_id:
+                print("** instance id missing **")
+                return
+            if not at_val:
+                print("** value missing **")
+                return
+            if not at_name:
+                print("** attribute name missing **")
+                return
+            new_key = class_name + "." + class_id
+            no_touchy = ["id", "created_at", "updated_at"]
             for key, value in storage._FileStorage__objects.items():
                 if new_key not in no_touchy:
                     if new_key == key:
                         setattr(value, at_name, at_val)
                         storage.save()
-        except KeyError:
-            pass
+        except BaseException:
+                pass
 
     def help_update(self):
         """
