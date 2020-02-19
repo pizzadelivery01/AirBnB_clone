@@ -170,7 +170,7 @@ class HBNBCommand(cmd.Cmd):
         """
         print("displays all instances [based on class if chosen]")
         print("all [class]")
-        
+
     def do_update(self, args):
         """
         updates object
