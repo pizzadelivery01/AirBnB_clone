@@ -204,7 +204,7 @@ class HBNBCommand(cmd.Cmd):
                     if new_key == key:
                         setattr(value, at_name, at_val)
                         storage.save()
-        except BaseException:
+        except Exception:
             pass
 
     def help_update(self):
