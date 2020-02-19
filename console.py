@@ -262,7 +262,8 @@ class HBNBCommand(cmd.Cmd):
             if class_name in Class_Dict:
                 if method_name[0:5] == 'all()':
                     self.do_all(class_name)
-
+                if method_name[0:7] == 'count()':
+                    self.do_count(class_name)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
