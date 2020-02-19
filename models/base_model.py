@@ -17,7 +17,7 @@ class BaseModel:
         '''
         Constructor method
         '''
-        from models import storage
+        from models.__init__ import storage
         if not kwargs:
             self.id = str(uuid4())
             self.created_at = datetime.now()
@@ -37,7 +37,7 @@ class BaseModel:
         '''
         Update public instance with current datetime
         '''
-        from models import storage
+        from models.__init__ import storage
         self.updated_at = datetime.now()
         storage.save()
 
