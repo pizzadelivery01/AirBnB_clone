@@ -82,5 +82,5 @@ class TestBaseModel(unittest.TestCase):
         '''
         base = self.test_class()
         _str = '[' + self.test_name + "] ({}) {}".format(
-        base.id, str(base.__dict__))
+                              base.id, str(base.__dict__))
         self.assertEqual(str(base), _str)
