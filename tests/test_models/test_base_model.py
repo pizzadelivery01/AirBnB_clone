@@ -63,7 +63,24 @@ class TestBaseModel(unittest.TestCase):
         self.assertNotEqual(base.updated_at, store)
 
     def test_todict(self):
-        """ """
+        '''
+        to_dict test
+        '''
         base = self.test_class()
         num = base.to_dict()
         self.assertEqual(base.to_dict(), num)
+
+    def test_save(self):
+        '''
+        save Test
+        '''
+        pass
+
+        def test_str(self):
+            '''
+            str test
+            '''
+            base = self.test_class()
+            _str = '[' + self.class_name + "] ({}) {}".format(
+                            base.id, str(base.__dict__))
+            self.assertEqual(str(base), _str)
