@@ -95,7 +95,7 @@ class HBNBCommand(cmd.Cmd):
         new_instance = args.partition(' ')
         class_name = new_instance[0]
         class_id = new_instance[2]
-        
+
         if not args:
             print('** class name missing **')
             return
@@ -249,6 +249,19 @@ class HBNBCommand(cmd.Cmd):
         counts the number of instances of a class
         """
         print("count <class>")
+
+    def default(self, line):
+        '''
+        Advanced
+        '''
+        _cmd = storage.all()
+        if '.' in line:
+            cmd_parse = line.split('.')
+            class_name = cmd_parse[0]
+            method_name = cmd_parse[1]
+            if class_name in Class_Dict:
+                if method_name[0:5] == 'all()':
+                    self.do_all(class_name)
 
 
 if __name__ == '__main__':
