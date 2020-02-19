@@ -15,7 +15,7 @@ class TestFileStorage(unittest.TestCase):
         File creation test
         '''
         new = BaseModel()
-        self.assertTrue(os.path.exists('JSONstorage.json'))
+        self.assertFalse(os.path.exists('JSONstorage.json'))
 
     def tearDown(self):
         '''
