@@ -196,7 +196,7 @@ class HBNBCommand(cmd.Cmd):
         if not at_name:
             print("** attribute name missing **")
             return
-            new_key = class_name + "." + class_id
+        new_key = class_name + "." + class_id
         no_touchy = ["id", "created_at", "updated_at"]
         try:
             for key, value in storage._FileStorage__objects.items():
