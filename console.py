@@ -218,8 +218,7 @@ class HBNBCommand(cmd.Cmd):
                 if new_key == key:
                     setattr(value, at_name, at_val)
                     storage.save()
-                    return
-        if new_key not in storage._FileStorage__objects.items():
+        if new_key not in storage._FileStorage__objects.keys():
             print("** no instance found **")
 
     def help_update(self):
