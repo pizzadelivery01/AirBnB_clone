@@ -219,6 +219,7 @@ class HBNBCommand(cmd.Cmd):
                     setattr(value, at_name, at_val)
                     new = value
                     new.save()
+        print("** no instance found **")
         if new_key not in storage._FileStorage__objects.keys():
             print("** no instance found **")
 
