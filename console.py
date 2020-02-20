@@ -217,7 +217,8 @@ class HBNBCommand(cmd.Cmd):
             if new_key not in no_touchy:
                 if new_key == key:
                     setattr(value, at_name, at_val)
-                    storage.save()
+                    new = value
+                    new.save()
         if new_key not in storage._FileStorage__objects.keys():
             print("** no instance found **")
 
